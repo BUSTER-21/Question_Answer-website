@@ -1,0 +1,54 @@
+{% extends 'question_base_template.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-8 posts-list">
+   <div class="single-post">
+      {% if same_user %}
+         <a class="btn btn-default" href=""><button class="btn btn-block btn-primary"><span class="fa fa-pencil fa-lg"></span><span style="margin-left: 5px; font-size:18px;">Edit</span></button></a>
+         <a class="btn btn-default" href=""><button class="btn btn-block btn-danger"><span class="fa fa-remove fa-lg"></span><span style="margin-left:5px; font-size:18px;">Remove</span></button></a>
+      {% endif %}
+      
+      <div class="blog_details">
+         <h2>{{quest.title}}
+         </h2>
+         <ul class="blog-info-link mt-3 mb-4">
+            <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+            <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+         </ul>
+         <p class="excert" style="font-size: 20px; color:black;">
+            {{quest.text|linebreaksbr}}
+         </p>
+         
+      </div>
+   </div>
+   
+
+   <div class="comments-area">
+        <div class="comment-list">
+              <div class="single-comment justify-content-between d-flex">
+                 <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                       <img src="{{quest.asker.student.photo.url}}" alt="">
+                       <p>Author</p>
+                    </div>
+                    <div class="desc">
+                       <p class="comment">
+                          Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                          Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                       </p>
+                       <div class="d-flex justify-content-between">
+                          <div class="d-flex align-items-center">
+                             <h3 style="color: black;">
+                                <a href="{% url 'profile_detail' pk=quest.asker.pk %}">{{quest.asker.username}}</a>
+                             </h3>
+                             
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+   </div>
+   {% endblock %}

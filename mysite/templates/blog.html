@@ -1,0 +1,75 @@
+{% extends 'basetemplate.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-8 mb-5 mb-lg-0">
+    <a href="{% url 'post_new' %}" class="top-menu"><span class="fa fa-plus fa-lg "></span><span
+            style="margin-left: 5px; font-size:24px">Add Post</span></a>
+    <h2 style="text-align: center;">
+        {% if drafts %}
+        DRAFT POST
+        {% endif %}
+    </h2>
+
+
+    <div class="blog_left_sidebar" style="padding-top: 100px !important;">
+
+        {% for post in posts %}
+        <article class="blog_item" style="border-color:darkgray ; border-width: 5px; border-style: solid;">
+            <div class="blog_item_img" style="margin-top:0%; margin-left:0%;">
+
+                <a href="{% url 'profile_detail' pk=post.author.pk  %}" class="blog_item_date"
+                    style="position:relative; left:0px; ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ post.author.student.photo.url }}" style="height: 80%; width:100%;" />
+                            <p>{{post.author.username}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="blog_details">
+                <a class="d-inline-block" href="{% url 'post_detail' pk=post.pk %}">
+                    <h2>{{post.title}}</h2>
+                    <p>{% if post.published_date %}<pre>published date : {{post.published_date}}</pre>{% else %}
+                        <pre>created date  : {{post.created_date}}</pre>{% endif %}
+                    </p>
+                </a>
+                <p>{{post.text|linebreaksbr}}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                </ul>
+            </div>
+
+        </article>
+        {% endfor %}
+
+
+
+
+
+
+        <nav class="blog-pagination justify-content-center d-flex">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Previous">
+                        <i class="ti-angle-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link">1</a>
+                </li>
+                <li class="page-item active">
+                    <a href="#" class="page-link">2</a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Next">
+                        <i class="ti-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

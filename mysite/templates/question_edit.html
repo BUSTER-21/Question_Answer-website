@@ -1,0 +1,13 @@
+{% extends 'question_base_template.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<a href="{% url 'question_new' %}" style="margin-left:20px;" ><span class="fa fa-plus fa-lg "></span><span style="margin-left: 5px; font-size:24px">Add Question</span></a>
+    <form method="POST" style="margin-top:10%">\
+        {% csrf_token %}
+            {{form1 | crispy}}
+            {{form2 | crispy}}
+            <button type="submit" class = "save btn btn-default" style="margin-top:20px">Save</button>
+
+    </form>
+{% endblock %}

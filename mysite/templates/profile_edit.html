@@ -1,0 +1,10 @@
+{% extends 'basetemplate.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <form method="POST" style="margin-top:10%">{% csrf_token %}
+            {{form1 | crispy}}
+            {{form2 | crispy}}
+            <button type="submit" class = "save btn btn-default" style="margin-top:20px">Save</button>
+
+    </form>
+{% endblock %}

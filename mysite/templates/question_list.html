@@ -1,0 +1,58 @@
+{% extends 'question_base_template.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-8 mb-5 mb-lg-0">
+    <a href="{% url 'question_new' %}" class="top-menu"><span class="fa fa-plus fa-lg "></span><span
+            style="margin-left: 5px; font-size:24px">Add Question</span></a>
+    <div class="blog_left_sidebar" style="padding-top: 100px !important;">
+
+        {% for question in questions %}
+        <article class="blog_item" style="border-color:darkgray ; border-width: 5px; border-style: solid;">
+            
+
+             <div class="blog_details">
+                <a class="d-inline-block" href="{% url 'question_detail' pk=question.pk %}">
+                    <h2>{{question.title}}</h2>
+                    <p><pre>
+                        {{question.date_of_ask}}
+                    </pre>
+                    </p>
+                </a>
+                <p>{{post.text|linebreaksbr}}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                </ul>
+            </div>
+
+        </article>
+        {% endfor %}
+
+
+
+
+
+
+        <nav class="blog-pagination justify-content-center d-flex">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Previous">
+                        <i class="ti-angle-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link">1</a>
+                </li>
+                <li class="page-item active">
+                    <a href="#" class="page-link">2</a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Next">
+                        <i class="ti-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

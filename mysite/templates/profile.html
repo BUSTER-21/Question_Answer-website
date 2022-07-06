@@ -1,0 +1,58 @@
+{% extends 'basetemplate.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-8 mb-5 mb-lg-0">
+    <div class="blog_left_sidebar">
+        {% for profile in ranker %}
+        <article class="blog_item">
+                <div class="blog_item_img">
+                        <div class="row">
+                                <div class="col-sm-6">
+                            <img class="card-img rounded-0" src="{% if profile.student.photo.url %}{{ profile.student.photo.url }}{% else %}{% static 'img/avatar.svg' %}{% endif %}" alt="" style="height: 100%; width:100%"></div>
+                            <div class="col-sm-6">
+                        <h4>{{profile.student.opinion}}</h4><h3 style="margin-right: 0px;">~{{profile.username}}</h3></div></div>
+                    <a href="#" class="blog_item_date">
+                        <h3>{{profile.student.date_of_birth.day}}</h3>
+                        <p>{{ profile.student.date_of_birth|date:'F' }}</p>
+                    </a>
+                    
+                </div>
+    
+                <div class="blog_details">
+                    <a class="d-inline-block" href="{% url 'profile_detail' pk=profile.pk %}">
+                        <h2>{{profile.username}}</h2>
+                        <p>{{std}}</p>
+                    </a>
+                    <p>{{profile.student.describe_yourself}}</p>
+                    <ul class="blog-info-link">
+                        <li><a href="#"><i class="fa fa-hand-o-right fa-5x"></i>{{profile.student.total_upvote}}</a></li>
+                        <li><a href="#"><i class="fa fa-star "></i>{{profile.student.points}}</a></li>
+                        <li><a href="#"><i class="fa fa-thumbs-up "></i> Travel, Lifestyle</a></li>
+                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                    </ul>
+                </div>
+            </article>
+        {% endfor %}
+        <nav class="blog-pagination justify-content-center d-flex">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Previous">
+                        <i class="ti-angle-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link">1</a>
+                </li>
+                <li class="page-item active">
+                    <a href="#" class="page-link">2</a>
+                </li>
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Next">
+                        <i class="ti-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

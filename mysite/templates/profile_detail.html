@@ -1,0 +1,110 @@
+{% extends 'basetemplate.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-8 mb-5 mb-lg-0">
+    <div class="blog_left_sidebar">
+        <article class="blog_item">
+            <div class="blog_item_img">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img class="card-img rounded-0" src="{{ profile.student.photo.url }}" alt=""
+                            style="height: 100%; width:100%"></div>
+                    <div class="col-sm-6">
+                        <h4>{{profile.student.opinion}}</h4>
+                        <h3 style="margin-right: 0px;">~{{profile.username}}</h3>
+                    </div>
+                </div>
+                <a href="#" class="blog_item_date">
+                    <h3>{{profile.student.date_of_birth.day}}</h3>
+                    <p>{{ profile.student.date_of_birth|date:'F' }}</p>
+                </a>
+
+            </div>
+
+            <div class="blog_details">
+                <a class="d-inline-block" href="{% url 'blog-details' %}">
+                    <h2>{{profile.username}}</h2>
+                    <p>{{std}}</p>
+                </a>
+                <p>{{profile.student.describe_yourself}}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="fa fa-hand-o-right fa-5x"></i>{{profile.student.total_upvote}}</a></li>
+                    <li><a href="#"><i class="fa fa-star "></i>{{profile.student.points}}</a></li>
+                    <li><a href="#"><i class="fa fa-thumbs-up "></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                    {% if confirm_user %}
+                    <li style="margin-left: 30%;"><a href="{% url 'profile_edit' pk=profile.pk %}">
+                            <h2>
+                                <button class="btn btn-primary"><i class="fa fa-edit fa-lg"></i>Edit</button>
+                            </h2>
+                        </a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </article>
+        <a href="{% url 'post_new' %}" class="top-menu"><span class="fa fa-plus fa-lg "></span><span
+                style="margin-left: 5px; font-size:24px">Add Post</span></a>
+        <a href="{% url 'post_draft_list' pk=user.pk %}" style="margin-left:20px"><span
+                class="fa fa-edit fa-lg"></span><span style="margin-left: 5px; font-size:24px;">Post Draft</span></a>
+        <hr style="margin-bottom:10%" />
+
+        <h2>My Posts</h2>
+        {% for post in posts %}
+        <article class="blog_item" style="border-color:darkgray ; border-width: 5px; border-style: solid;">
+            <div class="blog_item_img" style="margin-top:0%; margin-left:0%;">
+
+                <a href="{% url 'profile_detail' pk=post.author.pk  %}" class="blog_item_date"
+                    style="position:relative; left:0px; ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ post.author.student.photo.url }}" style="height: 80%; width:100%;" />
+                            <p>{{post.author.username}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="blog_details">
+                <a class="d-inline-block" href="{% url 'post_detail' pk=post.pk %}">
+                    <h2>{{post.title}}</h2>
+                    <p>{% if post.published_date %}
+                        <pre>published date : {{post.published_date}}</pre>{% else %}
+                        <pre>created date  : {{post.created_date}}</pre>{% endif %}
+                    </p>
+                </a>
+                <p>{{post.text|linebreaksbr}}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                </ul>
+            </div>
+
+        </article>
+        {% endfor %}
+        <h2>My Questions </h2>
+
+        {% for question in questions %}
+        <article class="blog_item" style="border-color:darkgray ; border-width: 5px; border-style: solid;">
+            
+
+             <div class="blog_details">
+                <a class="d-inline-block" href="{% url 'question_detail' pk=question.pk %}">
+                    <h2>{{question.title}}</h2>
+                    <p><pre>
+                        {{question.date_of_ask}}
+                    </pre>
+                    </p>
+                </a>
+                <p>{{post.text|linebreaksbr}}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                </ul>
+            </div>
+
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
